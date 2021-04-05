@@ -1,0 +1,91 @@
+AUTO_RESUME: True
+DATA_DIR: ''
+GPUS: (0,)
+LOG_DIR: log
+OUTPUT_DIR: output
+PRINT_FREQ: 100
+CUDNN:
+  BENCHMARK: True
+  DETERMINISTIC: False
+  ENABLED: True
+DATASET:
+  DATASET: crowd_pose_kpt
+  DATASET_TEST: crowd_pose
+  FLIP: 0.5
+  INPUT_SIZE: 512
+  OUTPUT_SIZE: 128
+  MAX_NUM_PEOPLE: 30
+  MAX_ROTATION: 30
+  MAX_SCALE: 1.5
+  SCALE_TYPE: 'short'
+  MAX_TRANSLATE: 40
+  MIN_SCALE: 0.75
+  NUM_JOINTS: 14
+  OFFSET_RADIUS: 4
+  SIGMA: 2.0
+  CENTER_SIGMA: 4.0
+  BG_WEIGHT: 0.1
+LOSS:
+  WITH_HEATMAPS_LOSS: True
+  HEATMAPS_LOSS_FACTOR: 1.0
+  WITH_OFFSETS_LOSS: True
+  OFFSETS_LOSS_FACTOR: 0.03
+MODEL:
+  SPEC:
+    FINAL_CONV_KERNEL: 1
+    PRETRAINED_LAYERS: ['*']
+    STAGES:
+      NUM_STAGES: 3
+      NUM_MODULES: 
+      - 1
+      - 4
+      - 3
+      NUM_BRANCHES: 
+      - 2
+      - 3
+      - 4
+      BLOCK: 
+      - BASIC
+      - BASIC
+      - BASIC
+      NUM_BLOCKS:
+      - [4, 4]
+      - [4, 4, 4]
+      - [4, 4, 4, 4]
+      NUM_CHANNELS:
+      - [32, 64]
+      - [32, 64, 128]
+      - [32, 64, 128, 256]
+      FUSE_METHOD: 
+      - SUM
+      - SUM
+      - SUM
+    HEAD_HEATMAP:
+      BLOCK: BASIC
+      NUM_BLOCKS: 1
+      NUM_CHANNELS: 32
+      DILATION_RATE: 1
+    HEAD_OFFSET:
+      BLOCK: ADAPTIVE
+      NUM_BLOCKS: 2
+      NUM_CHANNELS_PERKPT: 15
+      DILATION_RATE: 1
+  INIT_WEIGHTS: True
+  NAME: hrnet_dekr
+  NUM_JOINTS: 14
+  PRETRAINED: 'model/imagenet/hrnet_w32-36af842e.pth'
+TEST:
+  FLIP_TEST: True
+  IMAGES_PER_GPU: 1
+  MODEL_FILE: '' 
+  SCALE_FACTOR: [1]
+  NMS_THRE: 0.05
+  NMS_NUM_THRE: 7
+  KEYPOINT_THRESHOLD: 0.01
+  ADJUST_THRESHOLD: 0.05
+  MAX_ABSORB_DISTANCE: 75
+  GUASSIAN_KERNEL: 6
+  DECREASE: 0.8
+RESCORE:
+  VALID: True
+  MODEL_FILE: 'model/rescore/final_rescore_crowd_pose_kpt.pth'

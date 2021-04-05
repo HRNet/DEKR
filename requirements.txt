@@ -1,0 +1,10 @@
+torch==1.8.0
+torchvision==0.9.0
+opencv-python
+numpy==1.16.0
+tqdm
+yacs
+json_tricks
+tensorboardX
+pycocotools   
+scipy

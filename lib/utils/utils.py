@@ -24,14 +24,15 @@ def setup_logger(final_output_dir, rank, phase):
     time_str = time.strftime('%Y-%m-%d-%H-%M')
     log_file = '{}_{}_rank{}.log'.format(phase, time_str, rank)
     final_log_file = os.path.join(final_output_dir, log_file)
-    head = '%(asctime)-15s %(message)s'
-    # logging.basicConfig(format=head)
-    logging.basicConfig(filename=str(final_log_file),
-                        format=head)
+
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)
-    console = logging.StreamHandler()
-    logging.getLogger('').addHandler(console)
+
+    fh = logging.FileHandler(str(final_log_file), "a")
+    logger.addHandler(fh)
+ 
+    sh = logging.StreamHandler()
+    logger.addHandler(sh)
 
     return logger, time_str
 

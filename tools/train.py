@@ -177,7 +177,6 @@ def main_worker(
         'valid_global_steps': 0,
     }
 
-
     if args.distributed:
         # For multiprocessing distributed, DistributedDataParallel constructor
         # should always set the single device scope, otherwise,
@@ -251,6 +250,9 @@ def main_worker(
     )
 
     for epoch in range(begin_epoch, cfg.TRAIN.END_EPOCH):
+        if args.distributed:
+            train_loader.sampler.set_epoch(epoch)
+
         # train one epoch
         do_train(cfg, model, train_loader, loss_factory, optimizer, epoch,
                  final_output_dir, tb_log_dir, writer_dict)
@@ -269,7 +271,6 @@ def main_worker(
                 and args.rank == 0
         ):
             logger.info('=> saving checkpoint to {}'.format(final_output_dir))
-            #best_model = True
             save_checkpoint({
                 'epoch': epoch + 1,
                 'model': cfg.MODEL.NAME,

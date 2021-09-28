@@ -265,7 +265,7 @@ def main():
         for keypoint in COCO_KEYPOINT_INDEXES.values():
             csv_headers.extend([keypoint+'_x', keypoint+'_y'])
     elif cfg.DATASET.DATASET_TEST == 'crowd_pose':
-        for keypoint in COCO_KEYPOINT_INDEXES.values():
+        for keypoint in CROWDPOSE_KEYPOINT_INDEXES.values():
             csv_headers.extend([keypoint+'_x', keypoint+'_y'])
     else:
         raise ValueError('Please implement keypoint_index for new dataset: %s.' % cfg.DATASET.DATASET_TEST)

@@ -13,19 +13,12 @@ import torch
 
 
 def get_heat_value(pose_coord, heatmap):
-    kpt_now, num_joints, _ = pose_coord.shape
-    heatval = torch.zeros((kpt_now, num_joints, 1)).cuda()
-    for i in range(kpt_now):
-        for j in range(num_joints):
-            k1, k2 = int(pose_coord[i,j,0]), int(pose_coord[i,j,0])+1
-            k3, k4 = int(pose_coord[i,j,1]), int(pose_coord[i,j,1])+1
-            u = pose_coord[i,j,0]-int(pose_coord[i,j,0])
-            v = pose_coord[i,j,1]-int(pose_coord[i,j,1])
-            if k2 < heatmap.shape[2] and k1 >= 0 \
-                and k4 < heatmap.shape[1] and k3 >= 0:
-                heatval[i,j,0] = \
-                    heatmap[j,k3,k1]*(1-v)*(1-u) + heatmap[j,k4,k1]*(1-u)*v+ \
-                    heatmap[j,k3,k2]*u*(1-v) + heatmap[j,k4,k2]*u*v
+    _, h, w = heatmap.shape
+    heatmap_nocenter = heatmap[:-1].flatten(1,2).transpose(0,1)
+
+    y_b = torch.clamp(torch.floor(pose_coord[:,:,1]), 0, h-1).long()
+    x_l = torch.clamp(torch.floor(pose_coord[:,:,0]), 0, w-1).long()
+    heatval = torch.gather(heatmap_nocenter, 0, y_b * w + x_l).unsqueeze(-1)
     return heatval
 
 

@@ -159,7 +159,7 @@ After downloading data, run `python tools/crowdpose_concat_train_val.py` under `
 ```
 python tools/valid.py \
     --cfg experiments/coco/w32/w32_4x_reg03_bs10_512_adam_lr1e-3_coco_x140.yaml \
-    TEST.MODEL_FILE models/pose_coco/pose_dekr_hrnetw32_coco.pth
+    TEST.MODEL_FILE model/pose_coco/pose_dekr_hrnetw32_coco.pth
 ```
 
 #### Testing on COCO test-dev2017 dataset without multi-scale test using well-trained pose model
@@ -167,7 +167,7 @@ python tools/valid.py \
 ```
 python tools/valid.py \
     --cfg experiments/coco/w32/w32_4x_reg03_bs10_512_adam_lr1e-3_coco_x140.yaml \
-    TEST.MODEL_FILE models/pose_coco/pose_dekr_hrnetw32_coco.pth \ 
+    TEST.MODEL_FILE model/pose_coco/pose_dekr_hrnetw32_coco.pth \ 
     DATASET.TEST test-dev2017
 ```
 
@@ -176,7 +176,7 @@ python tools/valid.py \
 ```
 python tools/valid.py \
     --cfg experiments/coco/w32/w32_4x_reg03_bs10_512_adam_lr1e-3_coco_x140.yaml \
-    TEST.MODEL_FILE models/pose_coco/pose_dekr_hrnetw32_coco.pth \ 
+    TEST.MODEL_FILE model/pose_coco/pose_dekr_hrnetw32_coco.pth \ 
     TEST.NMS_THRE 0.15 \
     TEST.SCALE_FACTOR 0.5,1,2
 ```
@@ -186,7 +186,7 @@ python tools/valid.py \
 ```
 python tools/valid.py \
     --cfg experiments/coco/w32/w32_4x_reg03_bs10_512_adam_lr1e-3_coco_x140.yaml \
-    TEST.MODEL_FILE models/pose_coco/pose_dekr_hrnetw32_coco.pth \ 
+    TEST.MODEL_FILE model/pose_coco/pose_dekr_hrnetw32_coco.pth \ 
     TEST.MATCH_HMP True
 ```
 
@@ -195,7 +195,7 @@ python tools/valid.py \
 ```
 python tools/valid.py \
     --cfg experiments/crowdpose/w32/w32_4x_reg03_bs10_512_adam_lr1e-3_crowdpose_x300.yaml \
-    TEST.MODEL_FILE models/pose_crowdpose/pose_dekr_hrnetw32_crowdpose.pth
+    TEST.MODEL_FILE model/pose_crowdpose/pose_dekr_hrnetw32_crowdpose.pth
 ```
 
 #### Testing on crowdpose test dataset with multi-scale test using well-trained pose model
@@ -203,7 +203,7 @@ python tools/valid.py \
 ```
 python tools/valid.py \
     --cfg experiments/crowdpose/w32/w32_4x_reg03_bs10_512_adam_lr1e-3_crowdpose_x300.yaml \
-    TEST.MODEL_FILE models/pose_crowdpose/pose_dekr_hrnetw32_crowdpose.pth \ 
+    TEST.MODEL_FILE model/pose_crowdpose/pose_dekr_hrnetw32_crowdpose.pth \ 
     TEST.NMS_THRE 0.15 \
     TEST.SCALE_FACTOR 0.5,1,2
 ```
@@ -213,7 +213,7 @@ python tools/valid.py \
 ```
 python tools/valid.py \
     --cfg experiments/crowdpose/w32/w32_4x_reg03_bs10_512_adam_lr1e-3_crowdpose_x300.yaml \
-    TEST.MODEL_FILE models/pose_crowdpose/pose_dekr_hrnetw32_crowdpose.pth \ 
+    TEST.MODEL_FILE model/pose_crowdpose/pose_dekr_hrnetw32_crowdpose.pth \ 
     TEST.MATCH_HMP True
 ```
 
@@ -273,10 +273,10 @@ python tools/train_scorenet.py \
 ```
 python tools/valid.py \
     --cfg experiments/coco/w32/w32_4x_reg03_bs10_512_adam_lr1e-3_coco_x140.yaml \
-    TEST.MODEL_FILE models/pose_coco/pose_dekr_hrnetw32_coco.pth
+    TEST.MODEL_FILE model/pose_coco/pose_dekr_hrnetw32_coco.pth
 python tools/valid.py \
     --cfg experiments/crowdpose/w32/w32_4x_reg03_bs10_512_adam_lr1e-3_crowdpose_x300.yaml \
-    TEST.MODEL_FILE models/pose_crowdpose/pose_dekr_hrnetw32_crowdpose.pth \
+    TEST.MODEL_FILE model/pose_crowdpose/pose_dekr_hrnetw32_crowdpose.pth \
 ```
 
 ### Acknowledge
